@@ -1,1 +1,266 @@
-What is React?
+Q1.What is React?
+Answer=>What is React JS? 
+Answer=>React ek javascript ki library hoti he.iska use hum webapplication ke userInterface banane me karte he. Ye component based architecture per kam karti he.
+
+Components=>Components ka matlab hota he javascript functions ya code block jisse hum userInterface ke parts ko define karte he.isko UI ke regard me building block bhi kaha jata he.component independent or 
+Reusable hote he.
+
+React ka use mainly hum single pager application banane me karte he
+Single pager application ka matlab hota he ki puri application ek hi HTML page load hoti he.  load hone ke bad Data dynamically change ya update hota he isme hume bar bar reload karne ki jarurat nahi padti.ye react ke virtual dom or routing se possible hota he.
+
+Q2.What is DOM ?  
+Answer=>DOM (Document Object Model) jab humara HTML document 
+Browser per load hota he to browser humare document ke element ko objects ya node me convert kar deta he. In objects ko  hum javascript ki 
+Madad se hum DOM ke Objects ko access kar sakte he. Or inme add delete update bhi kar sakte he.Browser in objects ko ek tree ke form me
+Structure karta he isliye hum ise DOM tree bhi kahte h. 
+
+Q3.What is virtual DOM?
+jab hum humare react application me jsx likte he tab
+Humara ReactDom.render method humare us root react component ko actual dom me mount karta he . browser jsx nahi samajhta isleye react js compiler babel ka use karta he or humare jsx element ko React.CreateElement me convert kar deta he jo hume virtual objects return kar te he. Ye objects hierarchical hote he or ek tree ke form ka structure banarte he isliye hum inhe virtual
+DOM tree bhi kahte he. Ye objects javascript ki memory me store hote he isleye inhe memory representation of UI bhi kaha jata he.
+
+
+First Render ke kase me=>Jab vritudom dekhta he ki actual Dom empty 
+He to yah pura virtual DOM actual me mount kar deta he.
+
+Second Render ke kase me=>Jab koi state ya props change hoti he to fir ek naya virtual dom banta he or purane virtual dom ko compare(diffing) karta he Agar usme koi changes he to vo actual dom ko update kar deta he.  Is process ko hum reconciliation bhi kahte he.
+
+
+Q4.What is Create Root?
+Answer=>createRoot React18 ke dwara diya gaya ek naya feature he jisme hum async rendering (concurrent rendering) ko enable karta he.
+
+Createroot bydefault async rendering nahi karta bus hume kuch tools
+Provide karta he jisse hum async rendering kar sakte he.
+For example=>useTransition and useDifferedValue hook
+
+useDifferedValue hook  => iska use mainly search me hota he 
+Jab user input field me kuch type karta he to react use turant 
+Update kar deta he per react uski search process ko delay kar deta he.
+
+Ye question what is sync or async rendering ke respect me bhi pucha ja 
+Sakta he.
+
+
+Q5.What is CDN ?
+Answer=>CDN(Content Delivery Network)=>jab koi user request bhejta he or 
+Response dene wala server kisi dusri country me kahi dur hota he tab
+Response ane me der lagti or peg dhire load hota he jisse application ki 
+Performance decrease hoti he
+
+CDN=>jaha se user request bhej rahe he wahi per multiple edge server ko locate kar diya jata he inhe edge server ke network ko hum content delivery network kahte he.
+
+Jab koi user pehli bar request bhejta he to vah uske original server per jati he or edge server ki temporary memory me catched ho jati he 
+Jab koi dusra user same request bhejta he to edge server apne cached data me se response send kar deta he. Isse request original server per nahi jati he. Ye edge server static file ex=js,images,vedios,file send karti 
+He.
+
+Live Stream ke case me => Jab koi pehla user request bhejta he to request main server per jati he user ko response late ata he.
+Per response edge server ki memory me catched ho jata he.jab koi user 
+Same request send karta he to user us catched data me se  response bhejta he ye process continuos chalti rehti he user ke pass pehle chunks jate he sath hi me cached memory me store hoja te or yahi se dusre users ko ye data milta rahta he.  
+
+Popular CDN providers: Cloudflare, Akamai, AWS CloudFront, Google CDN, etc.
+
+
+CDN ka use SEO, user experience, aur performance improve karne me madad karta hai.
+
+Q6.What is Cross Origin ?
+Answer =>Cross Origin hum do alag jagah use karte he jinka dono alag case me alag significance he.
+
+Api ke case me=>1(Same Origin) /  2(Cross Origin)
+origin=>Origin = scheme (http/https) + domain + port
+Example: https://example.com:443
+
+
+Same Origin=>jab frontEnd or backend dono same origin per host hote he to browser ko resource access(API calls) karne ke liye CORS permission ki zarurat nahi hoti.
+
+Cross Origin=>jab frontend or backend dono alag-alag origin per host he
+To browser security ke liye CORS policy lagata he.
+
+Cross Origin ke case me Preflight request
+Credential ho(cookies,auth/header)
+Ye content-type(application/ho)
+Ya custom header ho
+
+Agar ye nahi he or simple request he to browser preflight request nahi bhejega.
+To browser pehle option request bhejta he
+
+CORS=>Cross Origin Resource sharing
+
+Jab request kisi cross origin per jati he to browser preflight request bhejta he agar response header me allow cross origin me request origin ati he to browser allow kar deta he or api call ho jati he.
+
+(Axios me withCredential:true ya fetch me credential:include likhte he tab)
+Agar ye likha to browser ko pata chal jata he ki api call me auth/cookies/header me kuch user specific jane wala he tab vah
+Preflight request bhejta he or dekhta he ki allow cross origin per same
+Domain aya he or allow credential true he agar he to api call kar deta he.
+
+(Agar preflight ke case me allow cross origin * ata he tab)
+* ke case me browser ko ye pata chal jata he ki hum kisi bhi origin se request bhej sakte he per credential bhejna riski ho sakta he kuki yah
+Open hota he sabhi origin request ke liye
+
+
+(Browser request ko block kab karta he)
+Agar request me allow credential true ho or preflight request bhejne per same origin ki jagar * aye to browser request block kar deta he.
+
+
+CDN ke case me=> jab hum humari index.html file me script tag ke agar 
+Kisi CDN se link se data inject kar he tab agar humne crossorigin nahi likha tab bhi vah crossorigin = anonymous le lega.
+Crossorigin = anonymous se hum browser ko ye bata rahe he ki CDN link public he or anonymous he isme cookies/header me creds nahi jayenge
+Agar crossorigin=”use-credential” likah he to browser cookies/request header me credential bhej sakta he.
+
+Script tag me intigrity likha he to =>integrity ka matlab he protection me jab bhi hum kisi CDN link ka use kar to sri website per jaker uski ek 
+Hash generate karna chahiye us hash ko integirty me rakhna chahiye
+Fir browser dekhta he kisi CDN link ke liye integrity hash generate kiya gaye he or us link ke liye browser bhi hash generate karta he agr browser ka generate kiya hash integriy me likhe hash se match ho jata he to browser file load kar deta he nahi to nahi karta he.
+
+Agar hash alag he matlab CDN link ki file me kuch change hua he.
+
+
+What is Cross Oigin?
+Answer =>Cross Origin hum do alag jagah use karte he jinka dono alag case me alag significance he.
+
+Api ke case me=>1(Same Origin) /  2(Cross Origin)
+origin=>Origin = scheme (http/https) + domain + port
+Example: https://example.com:443
+
+
+Same Origin=>jab frontEnd or backend dono same origin per host hote he to browser ko resource access(API calls) karne ke liye CORS permission ki zarurat nahi hoti.
+
+Cross Origin=>jab frontend or backend dono alag-alag origin per host he
+To browser security ke liye CORS policy lagata he.
+
+Cross Origin ke case me Preflight request
+Credential ho(cookies,auth/header)
+Ye content-type(application/ho)
+Ya custom header ho
+
+Agar ye nahi he or simple request he to browser preflight request nahi bhejega.
+To browser pehle option request bhejta he
+
+CORS=>Cross Origin Resource sharing
+
+Jab request kisi cross origin per jati he to browser preflight request bhejta he agar response header me allow cross origin me request origin ati he to browser allow kar deta he or api call ho jati he.
+
+(Axios me withCredential:true ya fetch me credential:include likhte he tab)
+Agar ye likha to browser ko pata chal jata he ki api call me auth/cookies/header me kuch user specific jane wala he tab vah
+Preflight request bhejta he or dekhta he ki allow cross origin per same
+Domain aya he or allow credential true he agar he to api call kar deta he.
+
+(Agar preflight ke case me allow cross origin * ata he tab)
+* ke case me browser ko ye pata chal jata he ki hum kisi bhi origin se request bhej sakte he per credential bhejna riski ho sakta he kuki yah
+Open hota he sabhi origin request ke liye
+
+
+(Browser request ko block kab karta he)
+Agar request me allow credential true ho or preflight request bhejne per same origin ki jagar * aye to browser request block kar deta he.
+
+
+CDN ke case me=> jab hum humari index.html file me script tag ke agar 
+Kisi CDN se link se data inject kar he tab agar humne crossorigin nahi likha tab bhi vah crossorigin = anonymous le lega.
+Crossorigin = anonymous se hum browser ko ye bata rahe he ki CDN link public he or anonymous he isme cookies/header me creds nahi jayenge
+Agar crossorigin=”use-credential” likah he to browser cookies/request header me credential bhej sakta he.
+
+Script tag me intigrity likha he to =>integrity ka matlab he protection me jab bhi hum kisi CDN link ka use kar to sri website per jaker uski ek 
+Hash generate karna chahiye us hash ko integirty me rakhna chahiye
+Fir browser dekhta he kisi CDN link ke liye integrity hash generate kiya gaye he or us link ke liye browser bhi hash generate karta he agr browser ka generate kiya hash integriy me likhe hash se match ho jata he to browser file load kar deta he nahi to nahi karta he.
+
+Agar hash alag he matlab CDN link ki file me kuch change hua he.
+
+
+Q7.What is Git?
+Answer=>Git ek version control system hota he . is system me hum file ke versions
+Matlab purane changes ko track or restore kar sakte he.basically git humare changes ka ek snapshot le kar rakh leta he or puran wale snapshot se compare karta he.
+
+Humare local project ko git se sync karne ke liye hume git init file chalate
+He jisse hum git ko humare project me initialise karte he isse .git file banti he jo ek hidden file hoti he.
+
+Is file ke andar humare sare changes store hote he
+
+Jab hum kisi file me change karte he or git add . chalate to ek blob object create hota he Blob ka full form he binary large  object iske sath hi ek hash create hota he ye dono hi humare .git/object ke andar store hote he
+
+Per git ko kaisa pata chalega ki file kis directory me he?
+Isleye git ek tree object banate he jiske andar file ki directory + blob refrence hota he.  
+
+
+Jab hum commit banate he tab git humare commit ke andar tree object + owner name + commit message store karta he or ek commit hash generate karta he.
+
+Is commit hash id ka us hum commit cherry pick karne ki liye bhi karte he
+
+Git blog hash se check karta he ki file me kuch changes to nahi hua
+Git tree hash se check karta he ki directory me kuch changes to nahi hua
+Git commit hash se check karta he ki commit me kuch change to nahi hua agar file ya directory me kuch change hota he to commit bhi change hota he
+
+
+Q8.What is Gitlab/Github ?
+Answer=>Git hub ke web-based platform he jaha hum apni git repository ko online store kar sakte he
+
+Ye ek tarah ka cloud storage he jaha aap apne code ko push (upload)
+Kar sakte ho
+
+Isse team ke sath collobration improve ho jata he . ye hume code review,pull request ,code tracking jaise suvidha deta he
+
+
+Q9.What is NPM ?
+Answer=>Npm ka koi full form nahi he but ye ek package manager jo humare installed kiye gaye package ko manage karta he		
+
+NPM ek package manager he jo npm per host packages ke manage karta he.NPM hume npmjs.com jaisa platform provide karta he jaha hum apne packages ko host kar sakte he taki dusre user ko packages ko install kar sake.
+
+Package=>yani javascript code ka bundle jise kisi developer ne npmjs (online registry) per publish kiya ho.
+
+NPM ka kya role he coding me?
+Hume jab kisi application ko banate he to usme sare components ko likhna nahi padta hum already likhe hua code ko npm se package ke roop me install kar lete he jise humari time save hota he or standard code bhi milta he.
+
+Hum humare dosto ke sath collaboration me kam kar sakte he same package ko use kar ke.
+
+Iske Benefits=>
+1.)Code reuse =>npm ki madad se hum already likhe hue code ko use kar sakte he.
+2.)version control=>npm packages ke version ko bhi control karta he 
+Agar hum chahe to purane versions ko bhi install kar sakte he.
+
+3.)dependency=>npm ka kam he humare project ki dependency ko manage karna humare project jin package per dependent ho unko 
+Manage karna 
+Jab npm install command run kiya jaata hai, toh NPM aapke project ki package.json file mein listed sabhi zaroori packages ko download karta hai aur unhe node_modules naam ke ek folder mein rakhta hai.
+
+
+Q10.What is package.json and package-lock.json?
+Answer=>Package.json file npm ki configuration file he jisme project se 
+Related imformation jaise metadata(auther,description),script jaise(npm run start:dev) (npm run start:prod) ke alava isme
+Isme packages ki dependency or dev dependency ki information hoti he
+Isme unke pckages ke version ki information bhi hoti he.
+
+Package.json ek editable he jaha hum dependency or project ki information ko update kar sakte he. Dependency ke version ko change 
+Kar sakte he.
+
+Package-lock.json=>ye ek autogenerated file he .Is file me dependency or sub dependency ke exact(current) version ko store kiya jata he.
+
+Ye file edit nahi karni chahiye 
+package-lock.json sabhi dependencies aur unke sub-dependencies ke exact (current) versions lock kar deti hai. Isse har developer ya deployment environment par exact same versions install hote hain, jisse consistency maintain hoti hai
+
+
+Q11.What is carat and tilde?
+Answer=>Carat humare package.json me likhi hue dependency ki range define karta he suppose hum axios ^1.2.0 likha he iska matlab agar npm 
+Per package update hua he to axios 1.2.0 to < 2.0.0 tak update ho sakta he.
+"^1.2.3"  → 1.2.4 ✅, 1.3.0 ✅, 1.9.9 ✅, 2.0.0 ❌
+Carat=>minor update + patch update(bug fixes)
+
+Tilde humare packages me likhi hue dependency ke sirf patch ko update 
+Karta he agar humare package me koi bug fix hua he to uska update
+Humare tilde kar dega iska range carat se kam hota he ~1.2.0 to < 1.3.0
+
+"~1.2.3"  → 1.2.4 ✅, 1.2.5 ✅, 1.3.0 ❌
+Tilde=>patch update(bug fixes)
+
+
+Q12.What is dependency and dev dependency?
+Answer:Dependecy=>ye vo packages hote he jo humare production
+Or run time environment me zorori hote.
+
+
+Use Case: In packages ke bina project production par nahi chal sakta.
+.
+
+devDependency=>ye vo packages hote he jo hume development,testing or build process ke time per use hote he.
+eslint, jest, webpack, babel jaise tools jo sirf development ke time use hote hain, inhe devDependency mein rakhte hain
+
+Use Case: In packages ke bina project development/testing nahi hota, lekin production par chalne ke liye zaroori nahi hai.
+
+
+
+
